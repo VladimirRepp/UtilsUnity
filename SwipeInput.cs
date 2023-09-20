@@ -91,16 +91,6 @@ public class SwipeInput : Singleton<SwipeInput>
         }
     }
 
-    void CreateSingleton()
-    {
-        if (INSTANCE == null)
-            INSTANCE = this;
-        else
-            Destroy(gameObject);
-
-        DontDestroyOnLoad(gameObject);
-    }
-
     private void Reset()
     {
         _startTouch = Vector2.zero;
