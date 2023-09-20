@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class SwipeInput : Singleton<SwipeInput>
 {
-    private static SwipeInput INSTANCE;
-
     private bool _tap, _swipeLeft, _swipeRight, _swipeDown, _swipeUp;
     private bool _isDragging = false;
     private Vector2 _startTouch, _swipeDelta;
