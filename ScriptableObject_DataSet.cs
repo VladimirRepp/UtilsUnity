@@ -32,4 +32,9 @@ public class ScriptableObject_DataSet<T> : ScriptableObject
     {
         _data.RemoveAt(index);
     }
+
+    public T[] ToArray()
+    {
+        return _data.ToArray();
+    }
 }
