@@ -2,30 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pool<T> : MonoBehaviour
+public class SetData<T> : MonoBehaviour
 {
-    protected List<T> _poolData;
+    protected List<T> _setData;
     protected int _currentIndex = 0;
     protected bool _isLoop = true;
 
-    public List<T> Data => _poolData;
-    public int Count => _poolData.Count;
+    public List<T> Data => _setData;
+    public int Count => _setData.Count;
     public T this[int index]
     {
-        get => _poolData[index];
-        set => _poolData[index] = value;
+        get => _setData[index];
+        set => _setData[index] = value;
     }
 
-    public Pool()
+    public SetData()
     {
-        _poolData = new List<T>();
+        _setData = new List<T>();
     }
 
     public void InitializationPool(T[] data)
     {
         foreach (T d in data)
         {
-            _poolData.Add(d);
+            _setData.Add(d);
         }
     }
 
@@ -33,7 +33,7 @@ public class Pool<T> : MonoBehaviour
     {
         foreach (T d in data)
         {
-            _poolData.Add(d);
+            _setData.Add(d);
         }
     }
 
@@ -41,30 +41,30 @@ public class Pool<T> : MonoBehaviour
     {
         foreach (T d in data)
         {
-            _poolData.Add(d);
+            _setData.Add(d);
         }
     }
 
     public void AddInPool(T d)
     {
-        _poolData.Add(d);
+        _setData.Add(d);
     }
 
     public void RemoveAtPool(int index)
     {
-        _poolData.RemoveAt(index);
+        _setData.RemoveAt(index);
     }
 
     public void RemoveInPool(T item)
     {
-        _poolData.Remove(item);
+        _setData.Remove(item);
     }
 
     public bool TryGetCurrent(out T data)
     {
-        data = _poolData[_currentIndex];
+        data = _setData[_currentIndex];
 
-        return _poolData[_currentIndex] == null ?
+        return _setData[_currentIndex] == null ?
             false : true;
     }
 
@@ -72,13 +72,13 @@ public class Pool<T> : MonoBehaviour
     {
         data = default;
 
-        if (_currentIndex >= _poolData.Count - 1 && !_isLoop)
+        if (_currentIndex >= _setData.Count - 1 && !_isLoop)
             return false;
 
-        _currentIndex = _currentIndex + 1 >= _poolData.Count ?
+        _currentIndex = _currentIndex + 1 >= _setData.Count ?
             0 : _currentIndex + 1;
 
-        data = _poolData[_currentIndex];
+        data = _setData[_currentIndex];
         return true;
     }
 
