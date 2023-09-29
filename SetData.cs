@@ -21,7 +21,7 @@ public class SetData<T> : MonoBehaviour
         _setData = new List<T>();
     }
 
-    public void InitializationPool(T[] data)
+    public void InitializationSet(T[] data)
     {
         foreach (T d in data)
         {
@@ -29,7 +29,7 @@ public class SetData<T> : MonoBehaviour
         }
     }
 
-    public void InitializationPool(ref T[] data)
+    public void InitializationSet(ref T[] data)
     {
         foreach (T d in data)
         {
@@ -37,7 +37,7 @@ public class SetData<T> : MonoBehaviour
         }
     }
 
-    public void InitializationPool(List<T> data)
+    public void InitializationSet(List<T> data)
     {
         foreach (T d in data)
         {
@@ -45,17 +45,17 @@ public class SetData<T> : MonoBehaviour
         }
     }
 
-    public void AddInPool(T d)
+    public void AddInSet(T d)
     {
         _setData.Add(d);
     }
 
-    public void RemoveAtPool(int index)
+    public void RemoveAtSet(int index)
     {
         _setData.RemoveAt(index);
     }
 
-    public void RemoveInPool(T item)
+    public void RemoveInSet(T item)
     {
         _setData.Remove(item);
     }
@@ -92,16 +92,16 @@ public class SetData<T> : MonoBehaviour
         _currentIndex = _currentIndex - 1 < 0 ?
             _poolData.Count - 1 : _currentIndex - 1;
 
-        data = _poolData[_currentIndex];
+        data = _setData[_currentIndex];
         return true;
     }
 
     public bool TryStepCurrentToNext()
     {
-        if (_currentIndex >= _poolData.Count - 1 && !_isLoop)
+        if (_currentIndex >= _setData.Count - 1 && !_isLoop)
             return false;
 
-        _currentIndex = _currentIndex + 1 >= _poolData.Count ?
+        _currentIndex = _currentIndex + 1 >= _setData.Count ?
             0 : _currentIndex + 1;
         return true;
     }
@@ -112,24 +112,24 @@ public class SetData<T> : MonoBehaviour
             return false;
 
         _currentIndex = _currentIndex - 1 < 0 ?
-           _poolData.Count - 1 : _currentIndex - 1;
+           _setData.Count - 1 : _currentIndex - 1;
         return true;
     }
 
     public T GetCurrent()
     {
-        return _poolData[_currentIndex];
+        return _setData[_currentIndex];
     }
 
     public T GetNext()
     {
-        if (_currentIndex >= _poolData.Count - 1 && !_isLoop)
+        if (_currentIndex >= _setData.Count - 1 && !_isLoop)
             return default;
 
-        _currentIndex = _currentIndex + 1 >= _poolData.Count ?
+        _currentIndex = _currentIndex + 1 >= _setData.Count ?
             0 : _currentIndex + 1;
 
-        return _poolData[_currentIndex];
+        return _setData[_currentIndex];
     }
 
     public T GetPrev()
@@ -138,17 +138,17 @@ public class SetData<T> : MonoBehaviour
             return default;
 
         _currentIndex = _currentIndex - 1 < 0 ?
-            _poolData.Count - 1 : _currentIndex - 1;
+            _setData.Count - 1 : _currentIndex - 1;
 
-        return _poolData[_currentIndex];
+        return _setData[_currentIndex];
     }
 
     public void StepCurrentToNext()
     {
-        if (_currentIndex >= _poolData.Count - 1 && !_isLoop)
+        if (_currentIndex >= _setData.Count - 1 && !_isLoop)
             throw new System.IndexOutOfRangeException();
 
-        _currentIndex = _currentIndex + 1 >= _poolData.Count ?
+        _currentIndex = _currentIndex + 1 >= _setData.Count ?
            0 : _currentIndex + 1;
     }
 
@@ -158,20 +158,20 @@ public class SetData<T> : MonoBehaviour
             throw new System.IndexOutOfRangeException();
 
         _currentIndex = _currentIndex - 1 < 0 ?
-            _poolData.Count - 1 : _currentIndex - 1;
+            _setData.Count - 1 : _currentIndex - 1;
     }
 
-    public void PoolMix()
+    public void SetMix()
     {
         System.Random random = new System.Random();
 
-        for (int i = _poolData.Count - 1; i >= 1; i--)
+        for (int i = _setData.Count - 1; i >= 1; i--)
         {
             int j = random.Next(i + 1);
 
-            var temp = _poolData[j];
-            _poolData[j] = _poolData[i];
-            _poolData[i] = temp;
+            var temp = _setData[j];
+            _setData[j] = _setData[i];
+            _setData[i] = temp;
         }
     }
 }
