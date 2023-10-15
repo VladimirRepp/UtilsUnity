@@ -2,69 +2,73 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SetData<T> : MonoBehaviour
+/// <summary>
+/// Pool with List<>
+/// </summary>
+/// <typeparam name="T"></typeparam>
+public class Pool<T> : MonoBehaviour
 {
-    protected List<T> _setData;
+    protected List<T> _poolData;
     protected int _currentIndex = 0;
     protected bool _isLoop = true;
 
-    public List<T> Data => _setData;
-    public int Count => _setData.Count;
+    public List<T> Data => _poolData;
+    public int Count => _poolData.Count;
     public T this[int index]
     {
-        get => _setData[index];
-        set => _setData[index] = value;
+        get => _poolData[index];
+        set => _poolData[index] = value;
     }
 
-    public SetData()
+    public Pool()
     {
-        _setData = new List<T>();
+        _poolData = new List<T>();
     }
 
-    public void InitializationSet(T[] data)
-    {
-        foreach (T d in data)
-        {
-            _setData.Add(d);
-        }
-    }
-
-    public void InitializationSet(ref T[] data)
+    public void InitializationPool(T[] data)
     {
         foreach (T d in data)
         {
-            _setData.Add(d);
+            _poolData.Add(d);
         }
     }
 
-    public void InitializationSet(List<T> data)
+    public void InitializationPool(ref T[] data)
     {
         foreach (T d in data)
         {
-            _setData.Add(d);
+            _poolData.Add(d);
         }
     }
 
-    public void AddInSet(T d)
+    public void InitializationPool(List<T> data)
     {
-        _setData.Add(d);
+        foreach (T d in data)
+        {
+            _poolData.Add(d);
+        }
     }
 
-    public void RemoveAtSet(int index)
+    public void AddInPool(T d)
     {
-        _setData.RemoveAt(index);
+        _poolData.Add(d);
     }
 
-    public void RemoveInSet(T item)
+    public void RemoveAtPool(int index)
     {
-        _setData.Remove(item);
+        _poolData.RemoveAt(index);
+    }
+
+    public void RemoveInPool(T item)
+    {
+        _poolData.Remove(item);
     }
 
     public bool TryGetCurrent(out T data)
     {
-        data = _setData[_currentIndex];
+        data = _poolData[_currentIndex];
 
-        return _setData[_currentIndex] == null ?
+        return _poolData[_currentIndex] == null ?
             false : true;
     }
 
@@ -72,13 +76,13 @@ public class SetData<T> : MonoBehaviour
     {
         data = default;
 
-        if (_currentIndex >= _setData.Count - 1 && !_isLoop)
+        if (_currentIndex >= _poolData.Count - 1 && !_isLoop)
             return false;
 
-        _currentIndex = _currentIndex + 1 >= _setData.Count ?
+        _currentIndex = _currentIndex + 1 >= _poolData.Count ?
             0 : _currentIndex + 1;
 
-        data = _setData[_currentIndex];
+        data = _poolData[_currentIndex];
         return true;
     }
 
@@ -92,16 +96,16 @@ public class SetData<T> : MonoBehaviour
         _currentIndex = _currentIndex - 1 < 0 ?
             _poolData.Count - 1 : _currentIndex - 1;
 
-        data = _setData[_currentIndex];
+        data = _poolData[_currentIndex];
         return true;
     }
 
     public bool TryStepCurrentToNext()
     {
-        if (_currentIndex >= _setData.Count - 1 && !_isLoop)
+        if (_currentIndex >= _poolData.Count - 1 && !_isLoop)
             return false;
 
-        _currentIndex = _currentIndex + 1 >= _setData.Count ?
+        _currentIndex = _currentIndex + 1 >= _poolData.Count ?
             0 : _currentIndex + 1;
         return true;
     }
@@ -112,24 +116,24 @@ public class SetData<T> : MonoBehaviour
             return false;
 
         _currentIndex = _currentIndex - 1 < 0 ?
-           _setData.Count - 1 : _currentIndex - 1;
+           _poolData.Count - 1 : _currentIndex - 1;
         return true;
     }
 
     public T GetCurrent()
     {
-        return _setData[_currentIndex];
+        return _poolData[_currentIndex];
     }
 
     public T GetNext()
     {
-        if (_currentIndex >= _setData.Count - 1 && !_isLoop)
+        if (_currentIndex >= _poolData.Count - 1 && !_isLoop)
             return default;
 
-        _currentIndex = _currentIndex + 1 >= _setData.Count ?
+        _currentIndex = _currentIndex + 1 >= _poolData.Count ?
             0 : _currentIndex + 1;
 
-        return _setData[_currentIndex];
+        return _poolData[_currentIndex];
     }
 
     public T GetPrev()
@@ -138,17 +142,17 @@ public class SetData<T> : MonoBehaviour
             return default;
 
         _currentIndex = _currentIndex - 1 < 0 ?
-            _setData.Count - 1 : _currentIndex - 1;
+            _poolData.Count - 1 : _currentIndex - 1;
 
-        return _setData[_currentIndex];
+        return _poolData[_currentIndex];
     }
 
     public void StepCurrentToNext()
     {
-        if (_currentIndex >= _setData.Count - 1 && !_isLoop)
+        if (_currentIndex >= _poolData.Count - 1 && !_isLoop)
             throw new System.IndexOutOfRangeException();
 
-        _currentIndex = _currentIndex + 1 >= _setData.Count ?
+        _currentIndex = _currentIndex + 1 >= _poolData.Count ?
            0 : _currentIndex + 1;
     }
 
@@ -158,20 +162,20 @@ public class SetData<T> : MonoBehaviour
             throw new System.IndexOutOfRangeException();
 
         _currentIndex = _currentIndex - 1 < 0 ?
-            _setData.Count - 1 : _currentIndex - 1;
+            _poolData.Count - 1 : _currentIndex - 1;
     }
 
-    public void SetMix()
+    public void PoolMix()
     {
         System.Random random = new System.Random();
 
-        for (int i = _setData.Count - 1; i >= 1; i--)
+        for (int i = _poolData.Count - 1; i >= 1; i--)
         {
             int j = random.Next(i + 1);
 
-            var temp = _setData[j];
-            _setData[j] = _setData[i];
-            _setData[i] = temp;
+            var temp = _poolData[j];
+            _poolData[j] = _poolData[i];
+            _poolData[i] = temp;
         }
     }
 }
