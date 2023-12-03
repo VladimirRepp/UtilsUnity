@@ -6,7 +6,7 @@ using UnityEngine;
 /// Pool with List<>
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public class Pool<T> : MonoBehaviour
+public class Pool<T> : MonoBehaviour where T : ICloned
 {
     protected List<T> _poolData;
     protected int _currentIndex = 0;
@@ -23,6 +23,15 @@ public class Pool<T> : MonoBehaviour
     public Pool()
     {
         _poolData = new List<T>();
+    }
+
+    public void InitializationPool(T data, int count)
+    {
+        for(int i = 0; i <count; i++)
+        {
+            T newData = (T)data.Clone();
+            _poolData.Add(newData);
+        }
     }
 
     public void InitializationPool(T[] data)
