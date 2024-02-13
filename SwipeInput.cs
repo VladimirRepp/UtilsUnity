@@ -10,7 +10,7 @@ public class SwipeInput : Singleton<SwipeInput>
 
     public Vector2 SwipeDelta { get { return _swipeDelta; } }
     public bool SwipeLeft { get { return _swipeLeft; } }
-    public bool SwipeRigrt { get { return _swipeRight; } }
+    public bool SwipeRight { get { return _swipeRight; } }
     public bool SwipeUp { get { return _swipeUp; } }
     public bool SwipeDown { get { return _swipeDown; } }
     public bool Tap { get { return _tap; } }
