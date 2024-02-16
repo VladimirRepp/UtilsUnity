@@ -1,2 +1,5 @@
-# GamePatterns
-Design patterns for game development in C#
+# CsUnity
+The C# code base for Unity
+- patterns
+- general principles
+- static class
