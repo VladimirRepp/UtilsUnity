@@ -57,3 +57,15 @@ public static class JsonHelper
         public T[] Items;
     }
 }
+
+/*
+    Пример:
+    
+    - Convert to JSON
+    Player[] playerInstance = new Player[2];
+    string playerToJson = JsonHelper.ToJson(playerInstance, true);
+
+    - Convert from JSON
+    string jsonString = "{\r\n    \"Items\": [\r\n        {\r\n            \"playerId\": \"8484239823\",\r\n            \"playerLoc\": \"Powai\",\r\n            \"playerNick\": \"Random Nick\"\r\n        },\r\n        {\r\n            \"playerId\": \"512343283\",\r\n            \"playerLoc\": \"User2\",\r\n            \"playerNick\": \"Rand Nick 2\"\r\n        }\r\n    ]\r\n}";
+    Player[] player = JsonHelper.FromJson<Player>(jsonString);
+*/
