@@ -59,7 +59,7 @@ public static class JsonHelper
 }
 
 /*
-    Пример:
+    Use:
     
     - Convert to JSON
     Player[] playerInstance = new Player[2];
