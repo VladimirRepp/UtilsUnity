@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Singleton<T> : MonoBehaviour where T : Component
+public class Singleton<T> : MonoBehaviour where T : Component, IInitialized
 {
     protected static T INSTANCE;
 
@@ -19,6 +19,9 @@ public class Singleton<T> : MonoBehaviour where T : Component
                     GameObject obj = new GameObject();
                     obj.name = typeof(T).Name;
                     INSTANCE = obj.AddComponent<T>();
+
+                    INSTANCE.Initialize();
+                    DontDestroyOnLoad(obj);
                 }
             }
             return INSTANCE;
@@ -37,4 +40,14 @@ public class Singleton<T> : MonoBehaviour where T : Component
             Destroy(gameObject);
         }
     }
+
+    public virtual void CreateInstance()
+    {
+
+    }
+}
+
+public interface IInitialized
+{
+    public void Initialize();
 }
