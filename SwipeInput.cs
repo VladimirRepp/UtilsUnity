@@ -1,8 +1,8 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwipeInput : Singleton<SwipeInput>
+public class SwipeInput : Singleton<SwipeInput>, IInitialized
 {
     private bool _tap, _swipeLeft, _swipeRight, _swipeDown, _swipeUp;
     private bool _isDragging = false;
@@ -27,7 +27,8 @@ public class SwipeInput : Singleton<SwipeInput>
             _isDragging = true;
             _startTouch = Input.mousePosition;
         }
-        else if (Input.GetMouseButtonUp(0)) {
+        else if (Input.GetMouseButtonUp(0))
+        {
             _isDragging = false;
             Reset();
         }
@@ -36,7 +37,8 @@ public class SwipeInput : Singleton<SwipeInput>
 
         #region Mobile inputs
 
-        if (Input.touches.Length > 0) {
+        if (Input.touches.Length > 0)
+        {
 
             if (Input.touches[0].phase == TouchPhase.Began)
             {
@@ -44,7 +46,8 @@ public class SwipeInput : Singleton<SwipeInput>
                 _isDragging = true;
                 _startTouch = Input.touches[0].position;
             }
-            else if (Input.touches[0].phase == TouchPhase.Ended || Input.touches[0].phase == TouchPhase.Canceled) {
+            else if (Input.touches[0].phase == TouchPhase.Ended || Input.touches[0].phase == TouchPhase.Canceled)
+            {
                 _isDragging = false;
                 Reset();
             }
@@ -54,18 +57,21 @@ public class SwipeInput : Singleton<SwipeInput>
 
         // Calculate the distance
         _swipeDelta = Vector2.zero;
-        if (_isDragging) {
+        if (_isDragging)
+        {
             if (Input.touches.Length > 0)
             {
                 _swipeDelta = Input.touches[0].position - _startTouch;
             }
-            else if (Input.GetMouseButton(0)) {
+            else if (Input.GetMouseButton(0))
+            {
                 _swipeDelta = (Vector2)Input.mousePosition - _startTouch;
             }
         }
 
         // Did we cross the deadzone?
-        if (_swipeDelta.magnitude > 125) {
+        if (_swipeDelta.magnitude > 125)
+        {
 
             // Which direction?
             float x = _swipeDelta.x;
@@ -95,5 +101,9 @@ public class SwipeInput : Singleton<SwipeInput>
     {
         _startTouch = Vector2.zero;
         _isDragging = false;
+    }
+
+    public void Initialize()
+    {
     }
 }
