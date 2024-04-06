@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 using TMPro;
 
 /// <summary>
-/// LoadingScene - самая первая сцена в списке для сборки
-/// (так как в ней подгружаются данные и для главного меню)
+/// LoadingScene - СЃР°РјР°СЏ РїРµСЂРІР°СЏ СЃС†РµРЅР° РІ СЃРїРёСЃРєРµ РґР»СЏ СЃР±РѕСЂРєРё
+/// (С‚Р°Рє РєР°Рє РІ РЅРµР№ РїРѕРґРіСЂСѓР¶Р°СЋС‚СЃСЏ РґР°РЅРЅС‹Рµ Рё РґР»СЏ РіР»Р°РІРЅРѕРіРѕ РјРµРЅСЋ)
 /// </summary>
 public class LoadingScene : MonoBehaviour
 {
@@ -19,8 +19,8 @@ public class LoadingScene : MonoBehaviour
     private AsyncOperation _asyncOperation;
 
     /// <summary>
-    /// SCENE_NAME будет пустым, так как может быть только 
-    /// одно поле которое отвечает за выбор необходимого уровня
+    /// SCENE_NAME Р±СѓРґРµС‚ РїСѓСЃС‚С‹Рј, С‚Р°Рє РєР°Рє РјРѕР¶РµС‚ Р±С‹С‚СЊ С‚РѕР»СЊРєРѕ 
+    /// РѕРґРЅРѕ РїРѕР»Рµ РєРѕС‚РѕСЂРѕРµ РѕС‚РІРµС‡Р°РµС‚ Р·Р° РІС‹Р±РѕСЂ РЅРµРѕР±С…РѕРґРёРјРѕРіРѕ СѓСЂРѕРІРЅСЏ
     /// </summary>
     public static int SceneId
     {
@@ -33,8 +33,8 @@ public class LoadingScene : MonoBehaviour
     }
 
     /// <summary>
-    /// SCENE_ID будет пустым, так как может быть только 
-    /// одно поле которое отвечает за выбор необходимого уровня
+    /// SCENE_ID Р±СѓРґРµС‚ РїСѓСЃС‚С‹Рј, С‚Р°Рє РєР°Рє РјРѕР¶РµС‚ Р±С‹С‚СЊ С‚РѕР»СЊРєРѕ 
+    /// РѕРґРЅРѕ РїРѕР»Рµ РєРѕС‚РѕСЂРѕРµ РѕС‚РІРµС‡Р°РµС‚ Р·Р° РІС‹Р±РѕСЂ РЅРµРѕР±С…РѕРґРёРјРѕРіРѕ СѓСЂРѕРІРЅСЏ
     /// </summary>
     public static string SceneName
     {
@@ -63,17 +63,17 @@ public class LoadingScene : MonoBehaviour
 
         if (SCENE_ID != -1)
         {
-            Debug.Log($"LoadingScene.LoadSceneRoutine(): Переход на уровень - {SCENE_ID}");
+            Debug.Log($"LoadingScene.LoadSceneRoutine(): РџРµСЂРµС…РѕРґ РЅР° СѓСЂРѕРІРµРЅСЊ - {SCENE_ID}");
             _asyncOperation = SceneManager.LoadSceneAsync(SCENE_ID);
         }
         else if (SCENE_NAME != "")
         {
-            Debug.Log($"LoadingScene.LoadSceneRoutine(): Переход на уровень - {SCENE_NAME}");
+            Debug.Log($"LoadingScene.LoadSceneRoutine(): РџРµСЂРµС…РѕРґ РЅР° СѓСЂРѕРІРµРЅСЊ - {SCENE_NAME}");
             _asyncOperation = SceneManager.LoadSceneAsync(SCENE_NAME);
         }
         else
         {
-            Debug.Log($"LoadingScene.LoadSceneRoutine(): Переход на уровень - {_defaultSceneId}");
+            Debug.Log($"LoadingScene.LoadSceneRoutine(): РџРµСЂРµС…РѕРґ РЅР° СѓСЂРѕРІРµРЅСЊ - {_defaultSceneId}");
             _asyncOperation = SceneManager.LoadSceneAsync(_defaultSceneId);
         }
 
