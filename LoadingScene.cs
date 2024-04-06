@@ -51,9 +51,6 @@ public class LoadingScene : MonoBehaviour
         if (SCENE_ID == 0 || SCENE_NAME == "LoadingScene")
             SCENE_ID = _defaultSceneId;
 
-        YandexSDK.Instance.CreateInstance();
-        GameDataManager.Instance.LoadLevelsData();
-
         StartCoroutine(LoadSceneRoutine());
     }
 
@@ -77,8 +74,8 @@ public class LoadingScene : MonoBehaviour
             _asyncOperation = SceneManager.LoadSceneAsync(_defaultSceneId);
         }
 
-        while (!_asyncOperation.isDone &&
-            !GameDataManager.Instance.IsDataIsReady) 
+        // Здесь же можно добавить собственное условие для ожидания
+        while (!_asyncOperation.isDone) 
         {
             float progress = _asyncOperation.progress;
             yield return 0;
