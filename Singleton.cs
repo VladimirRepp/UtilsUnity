@@ -20,7 +20,7 @@ public class Singleton<T> : MonoBehaviour where T : Component, IInitialized
                     obj.name = typeof(T).Name;
                     INSTANCE = obj.AddComponent<T>();
 
-                    INSTANCE.Initialize();
+                    INSTANCE.Startup();
                     DontDestroyOnLoad(obj);
                 }
             }
@@ -49,5 +49,5 @@ public class Singleton<T> : MonoBehaviour where T : Component, IInitialized
 
 public interface IInitialized
 {
-    public void Initialize();
+    public void Startup();
 }
