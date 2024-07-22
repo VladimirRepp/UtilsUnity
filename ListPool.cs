@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Pool with List<>
+/// Pool from List<>
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public class Pool<T> : MonoBehaviour where T : ICloned
+public class ListPool<T> : MonoBehaviour where T : ICloned
 {
     protected List<T> _poolData;
     protected int _currentIndex = 0;
@@ -20,7 +20,7 @@ public class Pool<T> : MonoBehaviour where T : ICloned
         set => _poolData[index] = value;
     }
 
-    public Pool()
+    public ListPool()
     {
         _poolData = new List<T>();
     }
