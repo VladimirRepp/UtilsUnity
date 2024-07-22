@@ -188,3 +188,8 @@ public class ListPool<T> : MonoBehaviour where T : ICloned
         }
     }
 }
+
+public interface ICloned 
+{
+    object Clone();
+}
