@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace DataSpace
 {
-    public class ArrayPool<T> : MonoBehaviour where T : ICloned, IInitialization
+    public class ArrayPool<T> : MonoBehaviour where T : ICloned, IInitialized
     {
         protected T[] _poolData;
         protected int _currentIndex = 0;
@@ -186,7 +186,7 @@ namespace DataSpace
         object Clone();
     }
 
-    public interface IInitialization
+    public interface IInitialized
     {
         void ObjInit();
     }
