@@ -1,7 +1,7 @@
 using System.Xml.Serialization;
 using System.IO;
 
-public static class Utilities 
+public static class Utils 
 {
     public static string Serialize<T>(this T toSerialize)
     {
