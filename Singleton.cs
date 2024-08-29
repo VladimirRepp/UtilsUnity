@@ -33,6 +33,7 @@ public class Singleton<T> : MonoBehaviour where T : Component, IInitialized
         if (INSTANCE == null)
         {
             INSTANCE = this as T;
+            INSTANCE.Startup();
             DontDestroyOnLoad(this.gameObject);
         }
         else
