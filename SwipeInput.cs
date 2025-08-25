@@ -103,7 +103,8 @@ public class SwipeInput : Singleton<SwipeInput>, IInitialized
         _isDragging = false;
     }
 
-    public void Initialize()
+    public void Startup()
     {
     }
 }
+
