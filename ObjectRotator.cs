@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectRotator : MonoBehaviour
@@ -12,3 +10,4 @@ public class ObjectRotator : MonoBehaviour
         transform.Rotate(_axis * _speed * Time.deltaTime, Space.World);
     }
 }
+
